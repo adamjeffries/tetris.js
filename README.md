@@ -1,6 +1,6 @@
 TetrisJS
 ========
-The TetrisJS framework is abstracts the controller logic of Tetris without touching the view layer (DOM).  It adheres to Classical Tetris rules which do not include things such as gravity or score combos.  There is an extensive example on how to use the framework in the examples folder.
+The TetrisJS framework abstracts the controller logic of Tetris without touching the view layer (DOM).  It adheres to Classical Tetris rules which do not include things such as gravity or score combos.  There is an extensive example on how to use the framework in the examples folder.
 
 
 
@@ -31,7 +31,7 @@ tetris.onMove(function(tetrimino){
 	//Rerender the entire board
 });
 
-//Bind tetris actions to key strokes - (using jQuery)
+//Bind tetris actions to key strokes - (example uses jQuery)
 $(document).keydown(function(e){
 	switch(e.keyCode){
 		case 37:	tetris.moveLeft();		break;
