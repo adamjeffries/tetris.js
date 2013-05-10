@@ -1,0 +1,173 @@
+<html>
+<head>
+
+
+<style type="text/css">
+body {
+	margin:0;
+	text-align:center;
+	background:#111;
+}
+#main {
+	position:relative;
+	display:table;
+	margin:auto;
+	height:100%;
+}
+#board {
+	position:relative;
+	float:left;
+	height:100%;
+	background:#fff;
+}
+	#board div {
+		position:relative;
+		float:left;
+		width:10%;
+		height:5%;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+	}
+	.mino_  { background:#fff; border:1px solid #eee; }
+	.mino_I { background:#f00; border:6px outset #c00; }
+	.mino_T { background:#0f0; border:6px outset #0c0; }
+	.mino_O { background:#00f; border:6px outset #00c; }
+	.mino_S { background:#ff0; border:6px outset #cc0; }
+	.mino_Z { background:#0ff; border:6px outset #0cc; }
+	.mino_J { background:#f0f; border:6px outset #c0c; }
+	.mino_L { background:#999; border:6px outset #666; }
+	.mino_ghost {
+		opacity:0.5;
+	}
+#side {
+	position:relative;
+	float:left;
+	height:100%;
+	background:#ddd;
+}
+	#side h1 {
+		width:100%;
+		font-size:22px;
+		margin:10px 0;
+	}
+	#queue {
+		margin:20px;
+		text-align:center;
+	}
+		#queue div {
+			display:inline-block;
+			width:25%;
+			height:25%;
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+		#queue br {
+			clear:both;
+			height:0;
+			width:100%;
+			line-height:0;
+		}
+
+</style>
+
+<script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="../tetris.js"></script>
+<script type="text/javascript">
+$(function(){
+	
+	//Build the game board
+	var board = [];
+	for(var r=0; r<20; r++){
+		board[r] = [];
+		for(var c=0; c<10; c++){
+			board[r][c] = $("<div class='mino_'></div>").appendTo("#board");
+		}
+	}
+	
+	//Size the board
+	$("#board").width($("#board").height()/2);
+	$("#queue").width($("#board").height()/5).height($("#board").height()/5);
+	
+	//Bind the keys to the actions	
+	$(document).keydown(function(e){
+		switch(e.keyCode){
+			case 37:	tetris.moveLeft();		break;
+			case 38:	tetris.rotateRight();	break;
+			case 39:	tetris.moveRight();		break;
+			case 40:	tetris.softDrop();		break;
+			case 32:	tetris.hardDrop();		break;
+			case 78:	tetris.newGame();		break;
+			case 80:	tetris.togglePause();	break;
+			case 16:	tetris.toggleHold();	break;
+			
+		}
+	});
+	
+	var renderBoardMatrix = function(boardMatrix){
+		for(var r=0; r<boardMatrix.length; r++){
+			for(var c=0; c<boardMatrix[r].length; c++){
+				board[r][c].removeClass().addClass("mino_"+boardMatrix[r][c]);
+			}
+		}
+	};
+	
+	//Bind the events
+	tetris.onMove(function(o){
+		for(var i=0; i<o.prevMinos.length; i++){
+			board[o.prevMinos[i].row][o.prevMinos[i].col].removeClass().addClass("mino_");
+		}
+		for(var i=0; i<o.minos.length; i++){
+			board[o.minos[i].row][o.minos[i].col].removeClass().addClass("mino_"+o.type);
+		}
+	}).onMatrixUpdate(function(boardMatrix){
+		renderBoardMatrix(boardMatrix);
+	}).onClearLines(function(lineNums,totalLines,boardMatrix){
+		renderBoardMatrix(boardMatrix);
+		$("#lines").html("Lines: " + totalLines);
+	}).onGhost(function(o){
+		for(var i=0; i<o.prevMinos.length; i++){
+			board[o.prevMinos[i].row][o.prevMinos[i].col].removeClass().addClass("mino_");
+		}
+		for(var i=0; i<o.minos.length; i++){
+			board[o.minos[i].row][o.minos[i].col].removeClass().addClass("mino_"+o.type+" mino_ghost");
+		}
+	}).onQueueChange(function(tetrimino){
+		$("#queue").html("");
+		for(var r=0; r<tetrimino.matrix.length; r++){
+			for(var c=0; c<tetrimino.matrix[r].length; c++){
+				var div = $("<div></div>").appendTo("#queue");
+				if(tetrimino.matrix[r][c]){
+					div.addClass("mino_"+tetrimino.type);
+				}
+			}
+			$("<br />").appendTo("#queue");
+		}
+	}).onLevelChange(function(newLevel,oldLevel){
+		$("#level").html("Level: " + (newLevel+1));
+	}).onScoreChange(function(newScore,oldScore){
+		$("#score").html("Score: " + newScore);
+	}).onBlockOut(function(){
+		alert("Good Game!");
+	});
+
+	tetris.newGame();
+	
+	
+});
+</script>
+
+</head>
+<body>
+	<div id="main">
+		<div id="board"></div>
+		<div id="side">
+			<h1 id="level">Level: 1</h1>
+			<h1 id="lines">Lines: 0</h1>
+			<h1 id="score">Score: 0</h1>
+			<div id="queue"></div>
+		</div>
+	</div>
+</body>
+</html>
