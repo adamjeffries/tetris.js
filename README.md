@@ -1,19 +1,21 @@
-TetrisJS
-========
+h1. TetrisJS
+
 123
 
 
 
 
-Methods
+h2. Methods
+
+
+h3. Event Listeners
 ***
 
+h4. .onMove()
 
-Event Listeners
-------
-
-###### .onMove()
-Binds to
+```
+Binds to **Returns**
+```
 
 ###### .onMatrix()
 
@@ -47,8 +49,8 @@ Binds to
 
 
 
-Actions
-------
+### Actions
+***
 
 ###### .moveLeft()
 
@@ -79,8 +81,8 @@ Actions
 
 
 
-Helpers
-------
+### Helpers
+***
 
 
 ###### .getScore()
