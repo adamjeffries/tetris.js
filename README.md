@@ -94,32 +94,52 @@ All event listeners return the *tetris* object so that they can be chained.  For
 Actions
 ------
 
-##### .moveLeft()
+All of the action methods will return the *tetris* object so that they can be chained as well.  
 
+* **newGame(level)**
+	* *Description* - 
+	* Parameters
+		* *level* - Specifies which level to start at.  Range: 0-n
 
-##### .moveRight()
+* **moveLeft()**
+	* *Description* - Moves the currently falling tetrimino one block to the left is possible.
+	* Parameters
+		* *None*
 
+* **moveRight()**
+	* *Description* - Moves the currently falling tetrimino one block to the right is possible.
+	* Parameters
+		* *None*
 
-##### .hardDrop()
+* **hardDrop()**
+	* *Description* - Drops the currently falling tetrimino as far as it can go.  This is also the same position as the ghost.
+	* Parameters
+		* *None*
 
+* **softDrop()**
+	* *Description* - Drops the currently falling tetrimino one space down.
+	* Parameters
+		* *None*
 
-##### .softDrop()
+* **rotateRight()**
+	* *Description* - Rotates the currently falling tetrimino in a clockwise direction.
+	* Parameters
+		* *None*
 
+* **rotateLeft()**
+	* *Description* - Rotates the currently falling tetrimino in a counter-clockwise direction.
+	* Parameters
+		* *None*
 
-##### .rotateRight()
+* **togglePause()**
+	* *Description* - Pauses and un-pauses the game.
+	* Parameters
+		* *None*
 
-
-##### .rotateLeft()
-
-
-##### .togglePause()
-
-
-##### .toggleHold()
-
-
-##### .newGame()
-
+* **toggleHold()**
+	* *Description* - Toggles placing a hold on the queue so that the next falling tetrimino will be a random new one and the queue will remain the same.
+	* Parameters
+		* *None*
 
 
 
@@ -127,18 +147,42 @@ Actions
 Helpers
 ------
 
-##### .getScore()
+These helper methods are optional and do not necessarily need to be used because everything can be accomplished using the event listeners.  See the example for further details.
 
-##### .getLevel()
 
-##### .getLines()
+* **getScore()**
+	* *Description* - Returns the current total score of the game
+	* Parameters
+		* *None*
 
-##### .getBoard()
+* **getLevel()**
+	* *Description* - Returns the current level of the game
+	* Parameters
+		* *None*
 
-##### .getTetriminoType()
+* **getLines()**
+	* *Description* - Returns the total number of cleared lines from the current game
+	* Parameters
+		* *None*
 
-##### .isOnHold()
+* **getBoard()**
+	* *Description* - Returns the full boardMatrix object 
+	* Parameters
+		* *None*
 
-##### .getTimer()
+* **getTetriminoType()**
+	* *Description* - Returns the currently falling tetrimino type
+	* Parameters
+		* *None*
+
+* **isOnHold()**
+	* *Description* - Returns a boolean indicating if the queue is on hold
+	* Parameters
+		* *None*
+
+* **getTimer()**
+	* *Description* - Returns the timer object
+	* Parameters
+		* *None*
 
 
