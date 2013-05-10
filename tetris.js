@@ -449,7 +449,13 @@ tetrisAction("moveRight",function(){
 //Hard Drop
 tetrisAction("hardDrop",function(){
 	if(!timer.isRunning()){ return; }
-	position = {row:getBottomRow(),col:position.col};
+	var bottomRow = getBottomRow();
+	var rowDiff = bottomRow - position.row;
+	position = {row:bottomRow,col:position.col};
+	if(rowDiff > 0){
+		score += rowDiff*(level+1);
+		tetrisEvent.score();
+	}
 	addTetriminoToBoard();
 	clearLines();
 	loadNextTetrimino();
