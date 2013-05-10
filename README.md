@@ -1,82 +1,85 @@
-h1. TetrisJS
-
+TetrisJS
+========
 123
 
 
 
 
-h2. Methods
+Methods
+------
 
 
-h3. Event Listeners
+### Event Listeners
 ***
 
-h4. .onMove()
-
+##### .onMove()
 ```
-Binds to **Returns**
+Binds to
 ```
 
-###### .onMatrix()
+##### .onMatrix()
+> This is the **first** line
+> This is another line?
+
+##### .onClearLines()
+> This is the **first** line
+
+> This is another line?
+
+##### .onLevelUp()
 
 
-###### .onClearLines()
-
-
-###### .onLevelUp()
-
-
-###### .onBlockOut()
-
-
-
-###### .onGhost()
-
-
-
-###### .onPause()
+##### .onBlockOut()
 
 
 
-###### .onPlay()
-
-
-###### .onQueue()
+##### .onGhost()
 
 
 
-###### .onScore()
+##### .onPause()
+
+
+
+##### .onPlay()
+
+
+##### .onQueue()
+
+
+
+##### .onScore()
 
 
 
 ### Actions
 ***
 
-###### .moveLeft()
+##### .moveLeft()
 
 
-###### .moveRight()
+##### .moveRight()
 
 
-###### .hardDrop()
+##### .hardDrop()
 
 
-###### .softDrop()
+##### .softDrop()
 
 
-###### .rotateRight()
+##### .rotateRight()
 
 
-###### .rotateLeft()
+##### .rotateLeft()
 
 
-###### .togglePause()
+##### .togglePause()
 
 
-###### .toggleHold()
+##### .toggleHold()
 
 
-###### .newGame()
+##### .newGame()
 
 
 
@@ -85,18 +88,18 @@ Binds to **Returns**
 ***
 
 
-###### .getScore()
+##### .getScore()
 
-###### .getLevel()
+##### .getLevel()
 
-###### .getLines()
+##### .getLines()
 
-###### .getBoard()
+##### .getBoard()
 
-###### .getTetriminoType()
+##### .getTetriminoType()
 
-###### .isOnHold()
+##### .isOnHold()
 
-###### .getTimer()
+##### .getTimer()
 
 
