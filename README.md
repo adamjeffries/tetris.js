@@ -1,7 +1,6 @@
 TetrisJS
 ========
-123
-
+The TetrisJS framework is abstracts the controller logic of Tetris without touching the view layer (DOM).  It adheres to Classical Tetris rules which do not include things such as gravity or score combos.  There is an extensive example on how to use the framework in the examples folder.
 
 
 
@@ -23,6 +22,7 @@ Terminology
 
 Example
 ------
+There is a full working example using the TetrisJS framework under *examples/basicExample.html*.
 ```javascript
 //Bind to the event listeners
 tetris.onMove(function(tetrimino){
