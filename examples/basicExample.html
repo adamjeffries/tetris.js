@@ -46,15 +46,32 @@ body {
 	height:100%;
 	background:#ddd;
 }
+	#newGame {
+		display:block;
+		margin:20px;
+		border:1px solid #111;
+		background:#999;
+		line-height:30px;
+		font-size:20px;
+		color:#fff;
+		text-decoration:none;
+	}
+		#newGame:hover {
+			background:#00f;
+		}
 	#side h1 {
 		width:100%;
 		font-size:22px;
 		margin:10px 0;
+		line-height:30px;
 	}
 	#queue {
 		margin:20px;
 		text-align:center;
 	}
+		#queue.isOnHold {
+			background:#99f;
+		}
 		#queue div {
 			display:inline-block;
 			width:25%;
@@ -69,11 +86,22 @@ body {
 			width:100%;
 			line-height:0;
 		}
+	#notes {
+		position:absolute;
+		left:0px;
+		bottom:0px;
+		width:100%;
+	}
+		#notes p {
+			margin:20px;
+			text-align:justify;
+			font-size:16px;
+		}
 
 </style>
 
 <script type="text/javascript" src="jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="../tetris.js"></script>
+<script type="text/javascript" src="../tetris.min.js"></script>
 <script type="text/javascript">
 $(function(){
 	
@@ -100,10 +128,15 @@ $(function(){
 			case 32:	tetris.hardDrop();		break;
 			case 78:	tetris.newGame();		break;
 			case 80:	tetris.togglePause();	break;
-			case 16:	tetris.toggleHold();	break;
+			case 16:	
+				tetris.toggleHold();
+				$("#queue")[tetris.isOnHold() ? "addClass" : "removeClass"]("isOnHold");
+				break;
 			
 		}
 	});
+	
+	$("#newGame").click(function(){ tetris.newGame(); });
 	
 	var renderBoardMatrix = function(boardMatrix){
 		for(var r=0; r<boardMatrix.length; r++){
@@ -121,7 +154,7 @@ $(function(){
 		for(var i=0; i<o.minos.length; i++){
 			board[o.minos[i].row][o.minos[i].col].removeClass().addClass("mino_"+o.type);
 		}
-	}).onMatrixUpdate(function(boardMatrix){
+	}).onMatrix(function(boardMatrix){
 		renderBoardMatrix(boardMatrix);
 	}).onClearLines(function(lineNums,totalLines,boardMatrix){
 		renderBoardMatrix(boardMatrix);
@@ -133,7 +166,7 @@ $(function(){
 		for(var i=0; i<o.minos.length; i++){
 			board[o.minos[i].row][o.minos[i].col].removeClass().addClass("mino_"+o.type+" mino_ghost");
 		}
-	}).onQueueChange(function(tetrimino){
+	}).onQueue(function(tetrimino){
 		$("#queue").html("");
 		for(var r=0; r<tetrimino.matrix.length; r++){
 			for(var c=0; c<tetrimino.matrix[r].length; c++){
@@ -144,14 +177,15 @@ $(function(){
 			}
 			$("<br />").appendTo("#queue");
 		}
-	}).onLevelChange(function(newLevel,oldLevel){
-		$("#level").html("Level: " + (newLevel+1));
-	}).onScoreChange(function(newScore,oldScore){
+	}).onLevelUp(function(level){
+		$("#level").html("Level: " + (level+1));
+	}).onScore(function(newScore,oldScore){
 		$("#score").html("Score: " + newScore);
 	}).onBlockOut(function(){
-		alert("Good Game!");
+		alert("Good Game!  Score: " + tetris.getScore());
 	});
 
+	//Start a new Game immediately
 	tetris.newGame();
 	
 	
@@ -163,10 +197,16 @@ $(function(){
 	<div id="main">
 		<div id="board"></div>
 		<div id="side">
+			<h1 style="border-bottom:1px solid #111;">TetrisJS Example</h1>
 			<h1 id="level">Level: 1</h1>
 			<h1 id="lines">Lines: 0</h1>
 			<h1 id="score">Score: 0</h1>
-			<div id="queue"></div>
+			<a href="javascript:;" id="newGame">New Game</a>
+			<div id="queue"></div>		
+			<div id="notes">
+				<h1>How To Play:</h1>
+				<p>Use the arrow keys to move left, right, rotate, and soft drop.  Space bar does a hard drop wherever the ghost is showing.  Shift key will cause a hold on the queue and 'p' will toggle pause the game.</p>
+			</div>
 		</div>
 	</div>
 </body>

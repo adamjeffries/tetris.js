@@ -153,7 +153,7 @@ tetrisEvent("move",function(){
 });
 
 //On Matrix Update
-tetrisEvent("matrixUpdate",function(){
+tetrisEvent("matrix",function(){
 	return [board];
 });
 
@@ -161,7 +161,7 @@ tetrisEvent("matrixUpdate",function(){
 tetrisEvent("clearLines");
 
 //On Level Change
-tetrisEvent("levelChange");
+tetrisEvent("levelUp");
 
 //On Block Out
 tetrisEvent("blockOut");
@@ -189,13 +189,13 @@ tetrisEvent("pause");
 tetrisEvent("play");
 
 //On Queue
-tetrisEvent("queueChange",function(){
+tetrisEvent("queue",function(){
 	return [nextTetrimino];
 });
 
 //On Score Change
 var oldScore = null;
-tetrisEvent("scoreChange",function(){
+tetrisEvent("score",function(){
 	var rtn = [score,oldScore];
 	oldScore = score;
 	return rtn;
@@ -274,7 +274,7 @@ var addTetriminoToBoard = function(){
 			}
 		}
 	}
-	tetrisEvent.matrixUpdate();
+	tetrisEvent.matrix();
 };
 
 var isBlockOut = function(){
@@ -345,7 +345,7 @@ var clearLines = function(){
 		}		
 		score += lineValues[clearLines.length-1]*(level+1);
 		lines += clearLines.length;
-		tetrisEvent.scoreChange();
+		tetrisEvent.score();
 		tetrisEvent.clearLines(clearLines,lines,board);
 		
 		var curLevel = getCurrentLevel();
@@ -367,7 +367,7 @@ var loadNextTetrimino = function(){
 	} else {
 		tetrimino = nextTetrimino;
 		nextTetrimino = newTetrimino;
-		tetrisEvent.queueChange();
+		tetrisEvent.queue();
 	}
 	
 	position = {row:tetrimino.matrix.length*-1,col:Math.floor((cols-tetrimino.matrix.length)/2)};
@@ -386,7 +386,7 @@ var moveTetriminoDown = function(){
 		tetrisEvent.blockOut();
 		timer.reset();
 	} else {
-		tetrisEvent.scoreChange();
+		tetrisEvent.score();
 		addTetriminoToBoard();
 		clearLines();
 		loadNextTetrimino();
@@ -397,7 +397,7 @@ var moveTetriminoDown = function(){
 var nextLevel = function(){
 	timer.removeAction("level"+level);
 	level++;
-	tetrisEvent.levelChange(level);
+	tetrisEvent.levelUp(level);
 	timer.addAction("level"+level,function(){
 		moveTetriminoDown();			
 	},(levelSpeeds[level] || 50));	
@@ -491,10 +491,10 @@ tetrisAction("rotateLeft",function(){
 tetrisAction("togglePause",function(){
 	if(timer.isRunning()){
 		timer.stop();
-		tetris.onPause();
+		tetrisEvent.pause();
 	} else {
 		timer.start();
-		tetris.onPlay();
+		tetrisEvent.play();
 	}
 });
 
@@ -521,7 +521,7 @@ tetrisAction("newGame",function(newLevel){
 			board[r][c] = "";
 		}
 	}
-	tetrisEvent.matrixUpdate();
+	tetrisEvent.matrix();
 	
 	var type = randomTetrimino();
 	nextTetrimino = {type:type,matrix:cloneMatrix(tetriminos[type])};
@@ -560,6 +560,10 @@ tetris.getTetriminoType = function(){
 
 tetris.isOnHold = function(){
 	return isOnHold;
+};
+
+tetris.getTimer = function(){
+	return timer;
 };
 
 
