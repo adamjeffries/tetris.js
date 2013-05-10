@@ -33,18 +33,14 @@ Event Listeners
 All event listeners return the *tetris* object so that they can be chained.  For example `tetris.onLevelUp(function(){}).onBlockOut();`
 
 
-##### .onMove(tetrimino, oldTetrimino)
+* .onMove(tetrimino, oldTetrimino)
+	* Binds to move event of the falling tetrimino.  This event is fired when the tetrimino rotates, moves horizontally, or drops.  
+	* Parameters
+		* **tetrimino** - *Format:* `{type:"Z",minos:[{row:1,col:5},...]}`
+		* **oldTetrimino** - *Format:* `{type:"Z",minos:[{row:1,col:5},...]}`
 
-	Binds to move event of the falling tetrimino.  This event is fired when the tetrimino rotates, moves horizontally, or drops.  
+* .onMatrix()
 
-###### Parameters
-* **tetrimino** - *Format:* `{type:"Z",minos:[{row:1,col:5},...]}`
-* **oldTetrimino** - *Format:* `{type:"Z",minos:[{row:1,col:5},...]}`
-
-
-##### .onMatrix()
-> This is the **first** line
-> This is another line?
 
 ##### .onClearLines()
 > This is the **first** line
