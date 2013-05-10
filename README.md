@@ -7,22 +7,39 @@ TetrisJS
 
 Usage
 ------
-
-
+Include the tetris.min.js file into the head of your document.  Then the `window.tetris` object will be available for use.
+```html
+<script type="text/javascript" src="scripts/tetris.min.js"></script>
+```
 
 
 Terminology
 ------
+* **Tetrimino** - There are seven types of tetriminos `I, T, O, S, Z, J, L` and they represent the shape they create.
+* **Mino** - Single square on the board
+* **Hard Drop** - When the currently falling tetrimino instantly drops to its lowest point
+* **Block Out** - When a mino of the tetrimino is outside the board when it lands.  Signaling the end of a game.
 
-##### Tetrimino Types
 
-
-Examples
+Example
 ------
+```javascript
+//Bind to the event listeners
+tetris.onMove(function(tetrimino){
+	//Render the tetrimino the board
+}).onMatrix(function(boardMatrix){
+	//Rerender the entire board
+});
 
-
-
-
+//Bind tetris actions to key strokes - (using jQuery)
+$(document).keydown(function(e){
+	switch(e.keyCode){
+		case 37:	tetris.moveLeft();		break;
+		case 38:	tetris.rotateRight();	break;
+		case 39:	tetris.moveRight();		break;
+	}
+});
+```
 
 
 
@@ -97,7 +114,7 @@ Actions
 All of the action methods will return the *tetris* object so that they can be chained as well.  
 
 * **newGame(level)**
-	* *Description* - 
+	* *Description* - Resets the board, timer, lines, score, and starts a new game
 	* Parameters
 		* *level* - Specifies which level to start at.  Range: 0-n
 
