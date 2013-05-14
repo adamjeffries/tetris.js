@@ -6,7 +6,7 @@ The TetrisJS framework abstracts the controller logic of Tetris without touching
 
 Usage
 ------
-Include the tetris.min.js file into the head of your document.  Then the `window.tetris` object will be available for use.
+Include the tetris.min.js file into the head of your document.  Then the `window.tetris` object will then be available for use.
 ```html
 <script type="text/javascript" src="scripts/tetris.min.js"></script>
 ```
@@ -15,14 +15,14 @@ Include the tetris.min.js file into the head of your document.  Then the `window
 Terminology
 ------
 * **Tetrimino** - There are seven types of tetriminos `I, T, O, S, Z, J, L` and they represent the shape they create.
-* **Mino** - Single square on the board
-* **Hard Drop** - When the currently falling tetrimino instantly drops to its lowest point
-* **Block Out** - When a mino of the tetrimino is outside the board when it lands.  Signaling the end of a game.
+* **Mino** - Single square on the board.
+* **Hard Drop** - When the currently falling tetrimino instantly drops to its lowest point.
+* **Block Out** - When a mino of the tetrimino is outside the board when it lands, signaling the end of a game.
 
 
 Example
 ------
-There is a full working example using the TetrisJS framework under *examples/basicExample.html*.
+There is a full working example using the TetrisJS framework under *examples/basicExample.html*.  However here is a small snippet to see what the pattern is.
 ```javascript
 //Bind to the event listeners
 tetris.onMove(function(tetrimino){
@@ -64,22 +64,22 @@ All event listeners return the *tetris* object so that they can be chained.  For
 * **onClearLines(lines,totalLines,boardMatrix)**
 	* *Description* - Binds to the clear lines event.  This occurs after a tetrimino is placed on the board, and if a row is complete.
 	* Parameters
-		* *lines* - The number of lines currently cleared in this event (Range: 1-4)
+		* *lines* - The number of lines currently cleared in this event (Range: 1-4).
 		* *totalLines* - The total number of lines cleared throughout the game.
 		* *boardMatrix* - Same parameter as onMatrix
 
 * **onLevelUp(level)**
-	* *Description* - Binds to the level up event.  This event occurs after a certain number of lines have been cleared.
+	* *Description* - Binds to the "level up" event.  This event occurs after a certain number of lines have been cleared.
 	* Parameters
 		* *level* - The new level (Range: 0-n)
 
 * **onBlockOut()**
-	* *Description* - Binds to the block off the board event.  When this event fires the game is over.
+	* *Description* - Binds to the block off the board event.  When this event fires, the game is over.
 	* Parameters
 		* *None*
 
 * **onGhost(ghost, oldGhost)**
-	* *Description* - Binds to the ghost change event.  This event first when a new tetrimino starts dropping or the current one is rotated or moved horizontally.
+	* *Description* - Binds to the ghost change event.  This event fires when a new tetrimino begins to drop, is rotated, or moves horizontally.
 	* Parameters
 		* *ghost* - `{type:"Z",minos:[{row:1,col:5},...]}`
 		* *oldGhost* - `{type:"Z",minos:[{row:1,col:5},...]}`
@@ -97,13 +97,13 @@ All event listeners return the *tetris* object so that they can be chained.  For
 * **onQueue(nextTetrimino)**
 	* *Description* - Binds to the queue updated event.  This event is fired when the piece from the queue now becomes the active one.
 	* Parameters
-		* *nextTetrimino* - `{type:"Z",matrix:[[true,false,false,...],...]}` - The matrix represents a square (2x2, 3x3, or 4x4) of the shape of the piece.
+		* *nextTetrimino* - `{type:"Z",matrix:[[true,false,false,...],...]}` - The matrix return parameter represents a square (2x2, 3x3, or 4x4) of the shape of the tetrimino.
 
 * **onScore(score, oldScore)**
 	* *Description* - Binds to the score changed event.  This event is fired when the score gets updated by completing lines or dropping pieces.
 	* Parameters
-		* *score* - The total new score
-		* *oldScore* - The previous total score - used to determine the difference
+		* *score* - The total new score.
+		* *oldScore* - The previous total score - used to determine the difference.
 
 
 
@@ -119,12 +119,12 @@ All of the action methods will return the *tetris* object so that they can be ch
 		* *level* - Specifies which level to start at.  Range: 0-n
 
 * **moveLeft()**
-	* *Description* - Moves the currently falling tetrimino one block to the left is possible.
+	* *Description* - Moves the currently falling tetrimino one block to the left if possible.
 	* Parameters
 		* *None*
 
 * **moveRight()**
-	* *Description* - Moves the currently falling tetrimino one block to the right is possible.
+	* *Description* - Moves the currently falling tetrimino one block to the right if possible.
 	* Parameters
 		* *None*
 
@@ -164,41 +164,41 @@ All of the action methods will return the *tetris* object so that they can be ch
 Helpers
 ------
 
-These helper methods are optional and do not necessarily need to be used because everything can be accomplished using the event listeners.  See the example for further details.
+These helper methods are optional and do not necessarily need to be used since everything can be accomplished using the event listeners.  See the example for further details.
 
 
 * **getScore()**
-	* *Description* - Returns the current total score of the game
+	* *Description* - Returns the current total score of the game.
 	* Parameters
 		* *None*
 
 * **getLevel()**
-	* *Description* - Returns the current level of the game
+	* *Description* - Returns the current level of the game.
 	* Parameters
 		* *None*
 
 * **getLines()**
-	* *Description* - Returns the total number of cleared lines from the current game
+	* *Description* - Returns the total number of cleared lines from the current game.
 	* Parameters
 		* *None*
 
 * **getBoard()**
-	* *Description* - Returns the full boardMatrix object 
+	* *Description* - Returns the full boardMatrix object.
 	* Parameters
 		* *None*
 
 * **getTetriminoType()**
-	* *Description* - Returns the currently falling tetrimino type
+	* *Description* - Returns the currently falling tetrimino type.
 	* Parameters
 		* *None*
 
 * **isOnHold()**
-	* *Description* - Returns a boolean indicating if the queue is on hold
+	* *Description* - Returns a boolean indicating if the queue is on hold.
 	* Parameters
 		* *None*
 
 * **getTimer()**
-	* *Description* - Returns the timer object
+	* *Description* - Returns the timer object.
 	* Parameters
 		* *None*
 
