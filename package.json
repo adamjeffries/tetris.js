@@ -1,0 +1,28 @@
+{
+  "name": "tetris.js",
+  "version": "0.0.1",
+  "description": "Micro Tetris Engine",
+  "main": "tetris.js",
+  "scripts": {
+    "test": "mocha test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/adamjeffries/tetris.js.git"
+  },
+  "keywords": [
+    "tetris",
+    "game",
+    "blocks"
+  ],
+  "author": "Adam Jeffries",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adamjeffries/tetris.js/issues"
+  },
+  "homepage": "https://github.com/adamjeffries/tetris.js",
+  "devDependencies": {
+    "mocha": "*",
+    "expect.js": "*"
+  }
+}
