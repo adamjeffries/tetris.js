@@ -1,3 +1,5 @@
+# ARCHIVED / DEPRECATED
+
 TetrisJS
 ========
 The TetrisJS framework abstracts the controller logic of Tetris without touching the view layer (DOM).  It adheres to Classical Tetris rules which do not include things such as gravity or score combos.  There is an extensive example on how to use the framework in the examples folder.
